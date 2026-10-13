@@ -1,0 +1,24 @@
+name: Food Delivery CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check website files
+        run: |
+          test -f index.html
+          test -f style.css
+          echo "Website files check passed"
+
+      - name: Build Docker image
+        run: docker build -t food-delivery-app .
