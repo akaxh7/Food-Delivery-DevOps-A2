@@ -18,7 +18,13 @@ jobs:
         run: |
           test -f index.html
           test -f style.css
-          echo "Website files check passed"
+          echo "Website files verified successfully"
 
-      - name: Build Docker image
+      - name: Build Food Delivery Docker image
         run: docker build -t food-delivery-app .
+
+      - name: Validate ML monitoring Compose configuration
+        run: docker compose -f q2-ml-monitoring/docker-compose.yml config
+
+      - name: Build ML monitoring API image
+        run: docker build -t ml-monitoring-api ./q2-ml-monitoring
